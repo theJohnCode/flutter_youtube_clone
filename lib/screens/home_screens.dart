@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_youtube_clone/data.dart';
 import 'package:flutter_youtube_clone/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -6,9 +7,20 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: CustomScrollView(
-        slivers: [CustomSliverAppBar()],
+        slivers: [
+          const CustomSliverAppBar(),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                final video = videos[index];
+                return VideoCard(video: video);
+              },
+              childCount: videos.length,
+            ),
+          ),
+        ],
       ),
     );
   }
