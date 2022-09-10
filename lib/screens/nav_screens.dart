@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_youtube_clone/models/video.dart';
 import 'package:flutter_youtube_clone/screens/home_screens.dart';
+
+final selectedVideoProvider = StateProvider<Video?>((ref) => null);
 
 class NavScreen extends StatefulWidget {
   const NavScreen({super.key});
@@ -21,20 +25,26 @@ class _NavScreenState extends State<NavScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: _screens
-            .asMap()
-            .map(
-              (i, screen) => MapEntry(
-                i,
-                Offstage(
-                  offstage: selectedIndex != i,
-                  child: screen,
-                ),
-              ),
-            )
-            .values
-            .toList(),
+      body: Consumer(
+        builder: (context, watch, _) {
+          final selectedVideo = watch(selectedVideoProvider).state;
+          print(selectedVideo?.title);
+          return Stack(
+            children: _screens
+                .asMap()
+                .map(
+                  (i, screen) => MapEntry(
+                    i,
+                    Offstage(
+                      offstage: selectedIndex != i,
+                      child: screen,
+                    ),
+                  ),
+                )
+                .values
+                .toList(),
+          );
+        },
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
