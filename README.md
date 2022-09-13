@@ -1,4 +1,10 @@
 # Flutter Youtube Clone
 
-[First screen](assets/Screenshot%20(26).png)
-[Another screen](assets/Screenshot%20(27).png)
+<p align="center">
+  <img width="600" height="200" src="/assets/home.png">
+</p>
+
+<p align="center">
+  <img width="600" height="200" src="/assets/another.png">
+</p>
+
